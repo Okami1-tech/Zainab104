@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#270d1b">
+<title>The Things You Don't Know I Notice 💌</title>
+<style>
+:root{
+ --night:#270d1b;
+ --wine:#50182f;
+ --rose:#d98c9e;
+ --pink:#f4cbd4;
+ --cream:#fff4e9;
+ --gold:#dfbd83;
+ --muted:#d9b9c3;
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;width:100%}
+body{
+ background:var(--night);color:var(--cream);
+ font-family:Georgia,"Times New Roman",serif;
+ overflow-x:hidden;
+}
+button{font:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}
+button:focus-visible{outline:2px solid var(--gold);outline-offset:4px}
+#sky{
+ position:fixed;inset:0;overflow:hidden;pointer-events:none;
+ z-index:0;
+ background:
+ radial-gradient(ellipse at 50% 0%,#61243c 0%,transparent 58%),
+ radial-gradient(ellipse at 0% 100%,#3e162c 0%,transparent 45%),
+ #270d1b;
+}
+#stars,#petals{position:absolute;inset:0;width:100%;height:100%}
+.star{
+ position:absolute;width:3px;height:3px;border-radius:50%;
+ background:#fff0c8;opacity:.2;
+ animation:twinkle var(--dur,3s) ease-in-out infinite alternate;
+ animation-delay:var(--delay,0s);
+}
+.star.big{
+ width:5px;height:5px;background:#ffe6b0;
+ box-shadow:0 0 10px 2px #f6d79c55;
+}
+@keyframes twinkle{
+ from{opacity:.12;transform:scale(.7)}
+ to{opacity:.9;transform:scale(1.4)}
+}
+.petal{
+ position:absolute;top:-40px;
+ width:14px;height:21px;
+ border-radius:90% 5% 90% 5%;
+ background:linear-gradient(145deg,#f8c4d0,#c96884);
+ opacity:.65;
+ animation:fall var(--fall,9s) linear infinite;
+ animation-delay:var(--delay,0s);
+}
+@keyframes fall{
+ 0%{transform:translate3d(0,-5vh,0) rotate(0deg);opacity:0}
+ 10%{opacity:.7}
+ 50%{transform:translate3d(var(--drift,30px),52vh,0) rotate(220deg)}
+ 90%{opacity:.6}
+ 100%{transform:translate3d(calc(var(--drift,30px)*-.5),110vh,0) rotate(520deg);opacity:0}
+}
+#app{position:relative;z-index:1;min-height:100svh;min-height:100dvh}
+.screen{
+ display:none;min-height:100svh;min-height:100dvh;
+ padding:25px 21px calc(25px + env(safe-area-inset-bottom));
+ animation:appear .7s ease both;
+}
+.screen.active{display:flex;flex-direction:column}
+@keyframes appear{
+ from{opacity:0;transform:translateY(12px)}
+ to{opacity:1;transform:translateY(0)}
+}
+.kicker{
+ font:9px/1.9 monospace;letter-spacing:2.3px;
+ text-transform:uppercase;color:var(--gold);
+}
+h1,h2,h3,p{margin-top:0}
+h1{
+ font-size:clamp(41px,11vw,62px);
+ line-height:1.03;font-weight:normal;letter-spacing:-1.7px;
+}
+h2{
+ font-size:clamp(32px,8.5vw,45px);
+ line-height:1.12;font-weight:normal;letter-spacing:-.7px;
+}
+p{font-size:16px;line-height:1.9;margin-bottom:18px}
+.muted{color:var(--muted)}
+.pink{color:var(--pink)}
+.gold{color:var(--gold)}
+.center{text-align:center}
+.topline{display:flex;justify-content:space-between;gap:12px;align-items:center}
+.topline span{font:9px monospace;letter-spacing:1px;color:var(--muted)}
+.btn{
+ min-height:54px;width:100%;padding:15px 17px;
+ display:flex;align-items:center;justify-content:space-between;gap:12px;
+ background:var(--cream);color:var(--wine);
+ border:1px solid var(--cream);font-size:14px;
+ transition:transform .2s,background .2s;
+}
+.btn:active{transform:scale(.98)}
+.btn.outline{background:transparent;color:var(--cream);border-color:#c18b9b}
+.arrow{font-size:20px}
+.bottom{margin-top:auto;padding-top:26px}
+.foot{
+ margin-top:15px;font:9px monospace;letter-spacing:1.5px;color:var(--muted);
+}
+.rule{height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:24px 0}
+.rose-art{width:100%;height:auto;max-width:260px;display:block;margin:auto}
+.intro{justify-content:space-between}
+.intro-title{margin:22px 0 14px}
+.intro-title em{color:var(--pink);font-weight:normal}
+.bloom-area{height:210px;display:grid;place-items:center;position:relative}
+.flower{
+ width:150px;height:150px;position:relative;
+ animation:flowerFloat 4s ease-in-out infinite;
+}
+@keyframes flowerFloat{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-8px) rotate(2deg)}}
+.petal-shape{
+ position:absolute;left:50%;top:50%;
+ width:40px;height:63px;margin:-31px 0 0 -20px;
+ transform-origin:50% 100%;
+ border-radius:50% 50% 43% 43%;
+ background:linear-gradient(145deg,#ffced8,#c66d89);
+ border:1px solid #ffdbe2;
+ box-shadow:inset -4px -4px 8px #70213c30;
+}
+.petal-shape:nth-child(1){transform:rotate(0deg) translateY(-22px)}
+.petal-shape:nth-child(2){transform:rotate(45deg) translateY(-22px)}
+.petal-shape:nth-child(3){transform:rotate(90deg) translateY(-22px)}
+.petal-shape:nth-child(4){transform:rotate(135deg) translateY(-22px)}
+.petal-shape:nth-child(5){transform:rotate(180deg) translateY(-22px)}
+.petal-shape:nth-child(6){transform:rotate(225deg) translateY(-22px)}
+.petal-shape:nth-child(7){transform:rotate(270deg) translateY(-22px)}
+.petal-shape:nth-child(8){transform:rotate(315deg) translateY(-22px)}
+.flower-center{
+ position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+ width:35px;height:35px;border-radius:50%;
+ background:radial-gradient(circle at 35% 30%,#fff0b9,#d9a04f 65%,#9c6429);
+ box-shadow:0 0 25px #edc87b55;
+}
+.glow-heart{
+ position:absolute;right:12%;top:17%;font-size:21px;
+ color:var(--pink);animation:heartBeat 2s ease-in-out infinite;
+}
+@keyframes heartBeat{0%,100%{transform:scale(1)}50%{transform:scale(1.22)}}
+.envelope-screen{justify-content:space-between}
+.envelope-stage{margin:auto 0;text-align:center;padding:25px 0}
+.envelope{
+ width:min(100%,330px);aspect-ratio:1.28/1;
+ position:relative;margin:0 auto;
+ background:#e7c7b6;box-shadow:0 18px 55px #0005;
+ overflow:hidden;border:1px solid #f1d7bd;
+}
+.env-back{
+ position:absolute;inset:0;
+ background:linear-gradient(140deg,#f5dfc9,#c99a8b);
+}
+.env-letter{
+ position:absolute;left:9%;right:9%;top:10%;height:76%;
+ background:#fff8eb;color:#502039;
+ display:flex;flex-direction:column;justify-content:center;align-items:center;
+ padding:12px;transition:transform 1.3s cubic-bezier(.2,.75,.2,1);
+}
+.env-letter .mini{font:9px monospace;letter-spacing:2px;color:#99714c}
+.env-letter strong{font-size:27px;font-weight:normal;font-style:italic;margin-top:12px}
+.env-letter small{font-size:11px;margin-top:8px;color:#8d5a69}
+.env-flap{
+ position:absolute;inset:0;
+ background:linear-gradient(145deg,#f6dfc9,#dfb6a8);
+ clip-path:polygon(0 0,100% 0,50% 58%);
+ transform-origin:top;
+ transition:transform .85s ease;z-index:3;
+}
+.env-pocket{
+ position:absolute;inset:0;
+ background:linear-gradient(35deg,#d9ad9c,#f0d1bd);
+ clip-path:polygon(0 100%,0 0,50% 57%,100% 0,100% 100%);
+ z-index:4;
+}
+.seal{
+ position:absolute;z-index:5;left:50%;top:48%;
+ transform:translate(-50%,-50%);
+ width:59px;height:59px;border-radius:50%;
+ display:grid;place-items:center;
+ background:radial-gradient(circle at 35% 25%,#a34862,#601c36 70%);
+ color:#fbe2c2;border:2px solid #e4c28d;
+ box-shadow:0 0 0 3px #68243b;
+ font-size:22px;transition:opacity .35s,transform .5s;
+}
+.envelope.open .env-flap{transform:rotateX(180deg);z-index:1}
+.envelope.open .seal{opacity:0;transform:translate(-50%,-50%) scale(.5)}
+.envelope.open .env-letter{transform:translateY(-38%)}
+.envelope.open .env-pocket{z-index:2}
+.env-instruction{font-size:13px;color:var(--muted);margin-top:22px}
+.letter-card{
+ background:linear-gradient(145deg,#fff7eb,#f4e2d5);
+ color:#422133;padding:25px 20px;
+ border:1px solid #e5c58d;
+ box-shadow:0 14px 35px #0002;
+}
+.letter-card .salutation{font-size:26px;font-style:italic;color:#802e4a;margin-bottom:22px}
+.letter-card p{font-size:15px;line-height:1.95}
+.letter-sign{font-size:28px;color:#802e4a;font-style:italic;margin-top:13px}
+.compliment-grid{display:grid;gap:12px;margin:18px 0}
+.compliment{
+ border:1px solid #875068;background:#3b1428;color:var(--cream);
+ padding:17px 16px;text-align:left;min-height:86px;
+ display:flex;flex-direction:column;justify-content:center;gap:8px;
+}
+.compliment .num{font:9px monospace;letter-spacing:1.5px;color:var(--gold)}
+.compliment .title{font-size:21px;color:var(--pink)}
+.compliment .hint{font:10px monospace;color:var(--muted)}
+.compliment:active{background:#59223b}
+.reveal{
+ padding:19px 17px;border-left:2px solid var(--gold);
+ background:#3c172a;min-height:126px;
+}
+.reveal p{font-size:15px;line-height:1.9;margin:0}
+.reveal .kicker{margin-bottom:10px}
+.full-rose{width:100%;max-width:330px;margin:5px auto 22px;display:block}
+.end-ornament{width:170px;height:130px;margin:15px auto 24px;display:block}
+@media(min-width:600px){
+ .screen{padding:34px max(24px,calc((100vw - 460px)/2)) 34px}
+}
+@media(max-height:700px){
+ .screen{padding-top:17px;padding-bottom:20px}
+ .bloom-area{height:150px}
+ .flower{transform:scale(.82)}
+ .intro-title{font-size:42px}
+ .bottom{padding-top:16px}
+ p{line-height:1.75;margin-bottom:13px}
+}
+@media(prefers-reduced-motion:reduce){
+ *,*:before,*:after{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+
+<div id="sky" aria-hidden="true">
+ <div id="stars"></div>
+ <div id="petals"></div>
+</div>
+
+<main id="app">
+
+<!-- PAGE 1: THE BLOOM -->
+<section class="screen intro active" id="s0">
+ <div class="topline">
+  <span>A LITTLE SOMETHING FOR YOU</span>
+  <span>♡ 001</span>
+ </div>
+
+ <div>
+  <div class="bloom-area">
+   <div class="flower" aria-label="Animated pink flower">
+    <div class="petal-shape"></div><div class="petal-shape"></div>
+    <div class="petal-shape"></div><div class="petal-shape"></div>
+    <div class="petal-shape"></div><div class="petal-shape"></div>
+    <div class="petal-shape"></div><div class="petal-shape"></div>
+    <div class="flower-center"></div>
+   </div>
+   <div class="glow-heart">♥</div>
+  </div>
+
+  <div class="center">
+   <div class="kicker">MADE WITH LOVE · JUST FOR HER</div>
+   <h1 class="intro-title">The things<br>you don't know<br><em>I notice.</em></h1>
+   <div class="rule"></div>
+   <p class="muted">For the girl with a beautiful mind,<br>a thoughtful heart, and a way of being<br>that makes her unforgettable.</p>
+   <p class="pink" style="font-size:19px;font-style:italic">My Sarauniya 💜</p>
+  </div>
+ </div>
+
+ <div class="bottom">
+  <button class="btn" onclick="go(1)"><span>There's something I want you to see</span><span class="arrow">↗</span></button>
+  <div class="foot">TAKE YOUR TIME, MY QUEEN</div>
+ </div>
+</section>
+
+<!-- PAGE 2: STARS -->
+<section class="screen" id="s1">
+ <div class="topline">
+  <span>01 / BEFORE THE LETTER</span>
+  <span>✦</span>
+ </div>
+
+ <div style="margin:auto 0">
+  <div class="center" style="font-size:39px;color:var(--gold);margin-bottom:17px;animation:twinkle 3s infinite alternate">✧　✦　✧</div>
+  <div class="kicker">A LITTLE OBSERVATION</div>
+  <h2 style="margin-top:15px">Pretty is easy<br>to notice.</h2>
+  <p>But you, Hayati?</p>
+  <p>There is so much more to you than what someone notices at first glance.</p>
+  <p>There's the way your mind works. The way you think about things. The way you can be thoughtful without making a big announcement about it.</p>
+  <p>And sometimes I wonder if you truly realize how special those things make you.</p>
+  <div class="rule"></div>
+  <p class="pink" style="font-style:italic;font-size:19px">So today, I want to tell you what I see.</p>
+ </div>
+
+ <div class="bottom">
+  <button class="btn" onclick="go(2)"><span>Let me tell you something</span><span class="arrow">→</span></button>
+  <div class="foot">02 / THINGS I ADMIRE ABOUT YOU</div>
+ </div>
+</section>
+
+<!-- PAGE 3: HER MIND -->
+<section class="screen" id="s2">
+ <div class="topline">
+  <span>02 / HER BEAUTIFUL MIND</span>
+  <span>✧</span>
+ </div>
+
+ <h2 style="margin-top:28px">Your mind is<br>one of my<br>favourite things<br>about you.</h2>
+ <p class="muted">And I don't think I tell you that enough.</p>
+
+ <div class="compliment-grid">
+  <button class="compliment" onclick="show(0,this)">
+   <span class="num">01 · YOUR INTELLIGENCE</span>
+   <span class="title">The way you think.</span>
+   <span class="hint">TAP TO OPEN ↗</span>
+  </button>
+  <button class="compliment" onclick="show(1,this)">
+   <span class="num">02 · YOUR THOUGHTFULNESS</span>
+   <span class="title">The things you notice.</span>
+   <span class="hint">TAP TO OPEN ↗</span>
+  </button>
+  <button class="compliment" onclick="show(2,this)">
+   <span class="num">03 · YOUR WISDOM</span>
+   <span class="title">The way you understand.</span>
+   <span class="hint">TAP TO OPEN ↗</span>
+  </button>
+ </div>
+
+ <div class="reveal" id="reveal" aria-live="polite">
+  <div class="kicker">A NOTE FOR YOU</div>
+  <p>There's something beautiful about a woman whose mind makes you stop and appreciate the person behind the smile. That's one of the things I admire about you.</p>
+ </div>
+
+ <div class="bottom">
+  <button class="btn" onclick="go(3)"><span>There's more to this girl</span><span class="arrow">→</span></button>
+  <div class="foot">03 / THE LITTLE THINGS</div>
+ </div>
+</section>
+
+<!-- PAGE 4: THE LITTLE THINGS -->
+<section class="screen" id="s3">
+ <div class="topline">
+  <span>03 / THE LITTLE THINGS</span>
+  <span>♡</span>
+ </div>
+
+ <div style="margin:auto 0">
+  <svg class="full-rose" viewBox="0 0 300 245" aria-label="Illustration of a rose">
+   <defs>
+    <linearGradient id="petalA" x1="0" y1="0" x2="1" y2="1">
+     <stop offset="0" stop-color="#ffcbd5"/>
+     <stop offset=".6" stop-color="#d97f99"/>
+     <stop offset="1" stop-color="#85304f"/>
+    </linearGradient>
+    <linearGradient id="leafA" x1="0" y1="0" x2="1" y2="1">
+     <stop offset="0" stop-color="#9eac79"/>
+     <stop offset="1" stop-color="#405d42"/>
+    </linearGradient>
+   </defs>
+   <path d="M150 120 Q149 180 151 222" stroke="#8da077" stroke-width="4" fill="none"/>
+   <path d="M151 179 Q105 144 92 172 Q110 201 151 186" fill="url(#leafA)" stroke="#bdc69a" stroke-width="1"/>
+   <path d="M151 199 Q191 158 214 182 Q196 209 151 205" fill="url(#leafA)" stroke="#bdc69a" stroke-width="1"/>
+   <g transform="translate(150 99)">
+    <path d="M0 30 C-55 31 -72 -10 -41 -35 C-20 -51 3 -35 0 -12 C12 -55 61 -46 64 -12 C68 13 36 34 0 30" fill="url(#petalA)" stroke="#ffd9df" stroke-width="1"/>
+    <path d="M0 23 C-35 17 -47 -6 -27 -20 C-12 -31 8 -13 0 7 C16 -21 40 -12 42 4 C44 19 22 28 0 23" fill="#e69aab" stroke="#fbd2db" stroke-width="1"/>
+    <path d="M0 16 C-17 10 -19 -8 -6 -13 C8 -18 18 -4 7 8 C24 -2 27 13 14 19" fill="#bc5877"/>
+    <path d="M-2 19 Q-16 -1 -1 -8 Q11 -12 12 1 Q15 12 -2 19" fill="#f1b7c4"/>
+   </g>
+   <g fill="#e6bd7e">
+    <circle cx="80" cy="43" r="3"/><circle cx="219" cy="66" r="2"/>
+    <circle cx="227" cy="119" r="3"/><circle cx="66" cy="122" r="2"/>
+   </g>
+  </svg>
+
+  <div class="kicker">THE THINGS THAT STAY WITH ME</div>
+  <h2>It's the little<br>things, Hayati.</h2>
+  <p>It's not only the big moments. It's the little ways you show care. The thought behind what you say. The way you encourage me and the way you make an effort to understand.</p>
+  <p>It's how a conversation with you can leave me thinking long after we've stopped talking.</p>
+  <p>And it's the fact that I keep discovering new reasons to appreciate you—not because you're trying to impress me, but because these are simply parts of who you are.</p>
+  <div class="rule"></div>
+  <p class="pink" style="font-style:italic">You have a way of making the ordinary feel meaningful.</p>
+ </div>
+
+ <div class="bottom">
+  <button class="btn" onclick="go(4)"><span>Now, open what's waiting for you</span><span class="arrow">→</span></button>
+  <div class="foot">04 / SOMETHING I WROTE FOR YOU</div>
+ </div>
+</section>
+
+<!-- PAGE 5: ENVELOPE -->
+<section class="screen envelope-screen" id="s4">
+ <div class="topline">
+  <span>04 / A LETTER FOR MY QUEEN</span>
+  <span>💌</span>
+ </div>
+
+ <div class="envelope-stage">
+  <div class="kicker center" style="margin-bottom:22px">SOMETHING FROM MY HEART TO YOURS</div>
+
+  <button id="envButton" style="display:block;width:100%;background:none;border:0;color:inherit;padding:0" onclick="openEnvelope()" aria-label="Open your letter">
+   <div class="envelope" id="envelope">
+    <div class="env-back"></div>
+    <div class="env-letter">
+     <span class="mini">A PRIVATE LETTER</span>
+     <strong>My Sarauniya</strong>
+     <small>from Muhammad, with love ♡</small>
+    </div>
+    <div class="env-flap"></div>
+    <div class="env-pocket"></div>
+    <div class="seal">م</div>
+   </div>
+  </button>
+
+  <div class="env-instruction" id="envInstruction">Tap the envelope to open it, my love.</div>
+  <p class="center pink" style="font-size:15px;font-style:italic;margin-top:24px">Some words deserve a little moment of their own.</p>
+ </div>
+
+ <div class="bottom">
+  <button class="btn" id="readButton" onclick="readLetter()" style="opacity:.45;pointer-events:none"><span>Read your letter</span><span class="arrow">→</span></button>
+  <div class="foot">A LITTLE ENVELOPE FULL OF APPRECIATION</div>
+ </div>
+</section>
+
+<!-- PAGE 6: THE LETTER -->
+<section class="screen" id="s5">
+ <div class="topline">
+  <span>05 / FROM MUHAMMAD</span>
+  <span>♡</span>
+ </div>
+
+ <div class="center" style="margin:27px 0 20px">
+  <div class="kicker">TO MY BEAUTIFUL SARAUNIYA</div>
+  <h2 style="margin-top:13px">If you could<br>see yourself<br>through my eyes…</h2>
+ </div>
+
+ <div class="letter-card">
+  <div class="salutation">My Hayati, 💜</div>
+
+  <p>Sometimes I think I don't tell you enough how much I admire the person you are.</p>
+
+  <p>And today, I don't just want to tell you that you're beautiful. I want to talk about the things that make you beautiful in ways that go far beyond what someone can see.</p>
+
+  <p><strong>Your intelligence.</strong> I love that there's a mind behind your smile—a person who thinks, learns, understands, and has her own way of looking at the world. I admire that about you, Sarauniya. I want you to keep learning, keep growing, keep asking questions, and never make yourself smaller just to make other people comfortable.</p>
+
+  <p><strong>Your thoughtfulness.</strong> You have ways of showing care that mean more than you may realize. Sometimes it isn't about doing something huge. It's about paying attention, encouraging someone, remembering what matters, or saying something at the right time. Those little things tell me something beautiful about your heart.</p>
+
+  <p><strong>The way you understand people.</strong> I appreciate the effort you make to communicate, the moments you try to explain what you mean, and the times you show that you care about how someone feels. Nobody understands everything perfectly, and none of us gets everything right all the time. But the willingness to think, listen, and try means a lot to me.</p>
+
+  <p><strong>Your own kind of brilliance.</strong> I hope you never measure your intelligence or your worth by comparing yourself to another person. You have your own strengths, your own perspective, your own potential, and your own things to contribute to this world. I hope you recognize them more and more as you grow.</p>
+
+  <p>And my love, I hope you know that you don't have to be perfect to be appreciated. You don't have to have the right words every time. You don't have to prove your intelligence to me, or keep doing things to earn my admiration.</p>
+
+  <p>I want to appreciate you as a whole person: your thoughts, your efforts, your good qualities, your growing edges, your serious moments, your playful moments, and all those little details that make you <em>you.</em></p>
+
+  <p>One thing I really want for you is to believe in the woman you're becoming. Let your mind grow. Let your confidence grow. Protect your kindness, but remember that your voice matters too. Never be afraid to share your ideas, speak thoughtfully, or pursue the things that are important to you.</p>
+
+  <p>I'm proud of the things I see in you, Sarauniya. And I hope that, alongside the love I give you, you keep discovering reasons to be proud of yourself.</p>
+
+  <p>You are not special to me simply because you are my babe. I admire you because there are beautiful things about the person you are that deserve to be admired.</p>
+
+  <p>So if today is one of those days when you forget how much you have to offer, come back to this little letter. Read it slowly. Remember that someone sees more than your appearance. Someone notices your mind, your effort, your thoughtfulness, and the heart behind them.</p>
+
+  <p>That someone is me. ❤️</p>
+
+  <p>May Allah increase you in beneficial knowledge, wisdom, goodness, confidence, and beautiful character. May He protect your heart, bless your efforts, and help you become everything that is good for you in this life and the next.</p>
+
+  <p>And may I always remember to appreciate you properly—not just with sweet words, but through the way I listen to you, respect you, encourage you, and treat you.</p>
+
+  <p style="margin-bottom:5px">You are appreciated, my queen. More than this little page could ever fully explain.</p>
+
+  <div class="letter-sign">With love,</div>
+  <div style="font-size:25px;color:#802e4a;margin-top:6px">Muhammad 💜</div>
+ </div>
+
+ <div class="bottom">
+  <button class="btn" onclick="go(6)"><span>There's one more thing I want you to keep</span><span class="arrow">→</span></button>
+  <div class="foot">06 / A LITTLE REMINDER FOR YOUR HEART</div>
+ </div>
+</section>
+
+<!-- PAGE 7: FINAL -->
+<section class="screen" id="s6">
+ <div class="topline">
+  <span>06 / FOR YOU, ALWAYS</span>
+  <span>✧</span>
+ </div>
+
+ <div style="margin:auto 0;text-align:center">
+  <svg class="end-ornament" viewBox="0 0 180 130" aria-label="Decorative pink flowers and stars">
+   <g fill="none" stroke="#dfbd83" stroke-width="1">
+    <path d="M90 106 Q90 68 90 35"/>
+    <path d="M90 78 Q56 45 43 70 Q60 93 90 78"/>
+    <path d="M90 91 Q122 54 139 76 Q121 99 90 91"/>
+   </g>
+   <g transform="translate(90 34)">
+    <ellipse rx="13" ry="22" cy="-16" fill="#d98c9e"/>
+    <ellipse rx="13" ry="22" cy="-16" transform="rotate(72)" fill="#edb5c1"/>
+    <ellipse rx="13" ry="22" cy="-16" transform="rotate(144)" fill="#d98c9e"/>
+    <ellipse rx="13" ry="22" cy="-16" transform="rotate(216)" fill="#edb5c1"/>
+    <ellipse rx="13" ry="22" cy="-16" transform="rotate(288)" fill="#d98c9e"/>
+    <circle r="10" fill="#dfbd83"/>
+   </g>
+   <g fill="#dfbd83">
+    <path d="M35 30l3 8 8 3-8 3-3 8-3-8-8-3 8-3z"/>
+    <path d="M147 23l2 6 6 2-6 2-2 6-2-6-6-2 6-2z"/>
+    <circle cx="143" cy="107" r="2"/><circle cx="28" cy="97" r="2"/>
+   </g>
+  </svg>
+
+  <div class="kicker">ONE LAST THING, SARAUNIYA</div>
+  <h1 style="margin:22px 0">Never forget<br>your own<br><em style="color:var(--pink)">beautiful mind.</em></h1>
+  <div class="rule"></div>
+  <p>You deserve to see the good in yourself as clearly as the people who care about you can see it.</p>
+  <p>Keep thinking. Keep learning. Keep being thoughtful. Keep growing into the woman you want to become.</p>
+  <p class="pink" style="font-size:20px;font-style:italic">And please, never underestimate how much you have to offer.</p>
+  <p style="margin-top:28px">May Allah bless you with goodness in this life and the next, my queen.</p>
+  <div class="gold" style="font-size:23px;margin-top:20px">Ameen. 🤍</div>
+  <div style="font-size:24px;font-style:italic;margin-top:28px">I appreciate you, Hayati.</div>
+  <div style="font-size:30px;margin-top:8px;color:var(--pink)">— Muhammad</div>
+ </div>
+
+ <div class="bottom">
+  <button class="btn outline" onclick="restart()"><span>Read it again, my love</span><span class="arrow">↺</span></button>
+  <div class="foot">MADE ESPECIALLY FOR SARAUNIYA 💜</div>
+ </div>
+</section>
+
+</main>
+
+<script>
+const screens=[...document.querySelectorAll('.screen')];
+let current=0;
+
+function go(n){
+ if(n<0||n>=screens.length)return;
+ screens[current].classList.remove('active');
+ current=n;
+ screens[current].classList.add('active');
+ window.scrollTo({top:0,behavior:'auto'});
+}
+
+function restart(){go(0)}
+
+function makeStars(){
+ const box=document.getElementById('stars');
+ const count=window.innerWidth<500?42:75;
+ for(let i=0;i<count;i++){
+  const s=document.createElement('i');
+  s.className='star'+(Math.random()>.82?' big':'');
+  s.style.left=(Math.random()*100)+'%';
+  s.style.top=(Math.random()*100)+'%';
+  s.style.setProperty('--dur',(2+Math.random()*4)+'s');
+  s.style.setProperty('--delay',(-Math.random()*5)+'s');
+  box.appendChild(s);
+ }
+}
+
+function makePetals(){
+ const box=document.getElementById('petals');
+ for(let i=0;i<13;i++){
+  const p=document.createElement('i');
+  p.className='petal';
+  p.style.left=(Math.random()*100)+'%';
+  p.style.setProperty('--fall',(8+Math.random()*10)+'s');
+  p.style.setProperty('--delay',(-Math.random()*18)+'s');
+  p.style.setProperty('--drift',(-45+Math.random()*90)+'px');
+  p.style.transform='scale('+(0.65+Math.random()*.7)+')';
+  box.appendChild(p);
+ }
+}
+
+const notes=[
+ {
+  title:'YOUR INTELLIGENCE',
+  text:'I admire the fact that you have your own mind, your own perspective, and your own way of understanding things. I love that there is always more to discover about how you think. Never stop being curious or growing into your potential.'
+ },
+ {
+  title:'YOUR THOUGHTFULNESS',
+  text:'Thoughtfulness is often quiet. It shows in the effort to understand, the words chosen with care, and the little things done because someone matters. I appreciate those qualities in you, even when you may think they are too ordinary to mention.'
+ },
+ {
+  title:'YOUR WISDOM',
+  text:'What I admire is not the idea that you must always know the right answer. It is the value of reflecting, listening, learning, and trying to understand. That kind of growth matters, and I hope you keep giving yourself room to learn without being hard on yourself.'
+ }
+];
+
+function show(index,button){
+ document.querySelectorAll('.compliment').forEach(el=>el.style.background='#3b1428');
+ button.style.background='#59223b';
+ const box=document.getElementById('reveal');
+ box.replaceChildren();
+ const heading=document.createElement('div');
+ heading.className='kicker';
+ heading.style.marginBottom='10px';
+ heading.textContent=notes[index].title;
+ const para=document.createElement('p');
+ para.textContent=notes[index].text;
+ box.append(heading,para);
+}
+
+let opened=false;
+function openEnvelope(){
+ if(opened)return;
+ opened=true;
+ document.getElementById('envelope').classList.add('open');
+ document.getElementById('envInstruction').textContent='A little letter, written with you in mind. ♡';
+ const btn=document.getElementById('readButton');
+ btn.style.opacity='1';
+ btn.style.pointerEvents='auto';
+}
+function readLetter(){if(opened)go(5)}
+
+document.addEventListener('keydown',e=>{
+ if(e.key==='ArrowRight'&&current<screens.length-1)go(current+1);
+ if(e.key==='ArrowLeft'&&current>0)go(current-1);
+});
+
+makeStars();
+makePetals();
+</script>
+</body>
+</html>
